@@ -11,10 +11,12 @@ console.dir(root);
 // * dom요소가 기준이 되는 offset을 기준으로 작성해본다.
 
 // 내무 로직 선언
-const Game = setTimeout(function(event){
-    modal.style.left = event.offsetX+"px";
-    modal.style.top = event.offsetY+"px";
+const Game = function(e){
+  setTimeout(function(){
+    modal.style.left = e.offsetX+"px";
+    modal.style.top = e.offsetY+"px";
   },250)
+};
 
 
 // 모달이 따라오는 로직
@@ -23,6 +25,7 @@ function mouseOver(){
 }
 // 모달 따라오는 로직 종료
 function mouseOverEnd(){
+  console.log('종료')
   root.removeEventListener('mousemove', Game);
 };
 
@@ -36,8 +39,10 @@ body.addEventListener('click', function(e){
     mouseOver();
     // 5초 동안 작동, 5초후 종료
     setTimeout(function(){
-      console.log ("종료");
       mouseOverEnd();
+      // console.log(e.type);
+      // ! 현재 이벤트 타겟이 종료되지 않는 현상이 발견됨
+      // ? 그러나 event.type을 조회해본 결과 갑자기 종료됨, event 매개변수의 문제로 예상된다.
     }, 5000)
   } else {}
 });
