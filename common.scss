@@ -5,16 +5,26 @@
   align-items: $align;
   flex-direction: $direc;
 }
+@mixin test {
+  outline: 1px solid black;
+}
 
 #root {
   width: 100vw;
   height: 100vh;
+  background-color: #ccc;
 
-  @include flex(center, center, column)
+  @include flex(center, center, column);
+  @include test;
 }
 
 #modal {
   width: 30vw;
   height: 30vw;
-  @include flex(center, center, column)
+  @include flex(center, center, column);
+  @include test;
+
+  position: absolute;
+  background-color: #fff;
 }
+
