@@ -1,0 +1,20 @@
+@charset "utf-8";
+@mixin flex($justify, $align, $direc) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direc;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+
+  @include flex(center, center, column)
+}
+
+#modal {
+  width: 30vw;
+  height: 30vw;
+  @include flex(center, center, column)
+}
