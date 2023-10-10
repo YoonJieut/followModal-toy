@@ -29,37 +29,31 @@ function mouseOverEnd(){
   root.removeEventListener('mousemove', Game);
 };
 
+// ! modal이 클릭되면 삭제되는 로직
 // 모달을 누르면 윈도우가 종료
+
+const closeEvent = function(e){
+  if(e.target.id === "modal"){
+    console.log("모달 이프문 true")
+    setTimeout(function(){
+      window.close();
+    }, 1000)
+  }
+}
+
 function modalClick(){
-  modal.addEventListener('click',function(e){
-    if(e.target.id === "modal"){
-      console.log("모달 이프문 true")
-      setTimeout(function(){
-        window.close();
-      }, 1000)
-    }
-  });
+  modal.addEventListener('click', closeEvent);
 }
 // 이벤트 종료
 function modalClickEnd(){
-  modal.removeEventListener('click',function(e){
-    if(e.target.id === "modal"){
-      console.log("모달 이프문 true")
-      setTimeout(function(){
-        alert("실패 했습니다.")
-        window.close();
-      }, 1000)
-    }
-  });
+  modal.removeEventListener('click', closeEvent);
 }
 
 
 
+// ! 이벤트 작동 로직
 body.addEventListener('click', function(e){
   console.dir(e.target);
-  // console.log(e.type);
-  // console.log(root.type); // undefined
-  // 참일 때, root를 누르면 작동하라
   if(e.target.id === "root") {
     console.log("true");
     mouseOver();
@@ -69,7 +63,6 @@ body.addEventListener('click', function(e){
       modalClickEnd();
       mouseOverEnd();
       console.log(modal.type);
-      // console.log(root.type); // undefined
       // ! 현재 이벤트 타겟이 종료되지 않는 현상이 발견됨
       // ? 그러나 event.type을 조회해본 결과 갑자기 종료됨, removeEventLitener의 event 매개변수의 문제로 예상된다.
     }, 5000)
@@ -78,7 +71,4 @@ body.addEventListener('click', function(e){
   }
 });
 
-
-
-// ! modal이 클릭되면 삭제되는 로직
 
