@@ -10,20 +10,20 @@ console.dir(root);
 // * 마우스가 움직일 때마다 작동하는 mousemove와
 // * dom요소가 기준이 되는 offset을 기준으로 작성해본다.
 
+// 내무 로직 선언
+const Game = setTimeout(function(event){
+    modal.style.left = event.offsetX+"px";
+    modal.style.top = event.offsetY+"px";
+  },250)
+
+
 // 모달이 따라오는 로직
 function mouseOver(){
-  root.addEventListener('mousemove',function Game(event){
-    // console.dir(event);
-    // console.log(event.offsetX, event.offsetY)
-    setTimeout(function(){
-      modal.style.left = event.offsetX+"px";
-      modal.style.top = event.offsetY+"px";
-    },250)
-  });
+  root.addEventListener('mousemove', Game);
 }
 // 모달 따라오는 로직 종료
 function mouseOverEnd(){
-  root.removeEventListener('mousemove', Game(e));
+  root.removeEventListener('mousemove', Game);
 };
 
 
@@ -37,6 +37,7 @@ body.addEventListener('click', function(e){
     // 5초 동안 작동, 5초후 종료
     setTimeout(function(){
       console.log ("종료");
+      mouseOverEnd();
     }, 5000)
   } else {}
 });
